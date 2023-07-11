@@ -1,0 +1,16 @@
+{
+  "name": "binary-search-tree",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "run": "tsc && npm index.js"
+  },
+  "keywords": [],
+  "author": "Jan Steikowski <j.steikowski@aol.com>",
+  "license": "MIT",
+  "dependencies": {
+    "tsc": "^2.0.4"
+  }
+}
