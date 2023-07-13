@@ -1,14 +1,14 @@
 import { NoDe } from "./Node.js";
+import { Tree } from "./Tree.js";
 import pkg from "lodash";
 const { uniq } = pkg;
-//let myArr: number[] = [1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324];
-let myArr2 = [3, 4, 5, 6, 1, 2];
+let myArr = [1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324];
+//let myArr2: number[] = [3, 4, 5, 6, 1, 2];
 function sortAndFilterArray(array) {
     array.sort((a, b) => {
         return a - b;
     });
     array = uniq(array);
-    console.log(array);
     //array = array.filter((item, index) => myArr.indexOf(item) === index);
     return array;
 }
@@ -19,8 +19,6 @@ function buildTree(array) {
         return null;
     }
     let sortedArray = sortAndFilterArray(array);
-    console.log(sortedArray);
-    console.log(sortedArray.length - 1);
     const tree = makeTree(sortedArray, 0, sortedArray.length - 1);
     return tree;
 }
@@ -29,10 +27,23 @@ function makeTree(array, start, end) {
         return null;
     }
     let mid = Math.floor((start + end) / 2);
-    console.log(array[mid]);
-    let Nodi = new NoDe(array[mid]);
-    Nodi.setLeft(makeTree(array, start, mid - 1));
-    Nodi.setRight(makeTree(array, mid + 1, end));
-    return Nodi;
+    let nodi = new NoDe(array[mid]);
+    nodi.setLeft(makeTree(array, start, mid - 1));
+    nodi.setRight(makeTree(array, mid + 1, end));
+    return nodi;
 }
-console.log(buildTree(myArr2));
+const prettyPrint = (node, prefix = "", isLeft = true) => {
+    if (node === null) {
+        return;
+    }
+    if (node.right !== null) {
+        prettyPrint(node.right, `${prefix}${isLeft ? "│   " : "    "}`, false);
+    }
+    console.log(`${prefix}${isLeft ? "└── " : "┌── "}${node.data}`);
+    if (node.left !== null) {
+        prettyPrint(node.left, `${prefix}${isLeft ? "    " : "│   "}`, true);
+    }
+};
+const myTree = new Tree(buildTree(myArr));
+console.log(myTree.insert(219));
+prettyPrint(myTree.root);
