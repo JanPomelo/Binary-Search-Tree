@@ -45,5 +45,5 @@ const prettyPrint = (node, prefix = "", isLeft = true) => {
     }
 };
 const myTree = new Tree(buildTree(myArr));
-console.log(myTree.delete(7));
+console.log(myTree.delete(5));
 prettyPrint(myTree.root);

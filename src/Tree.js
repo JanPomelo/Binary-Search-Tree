@@ -58,6 +58,34 @@ export class Tree {
                 this.root = null;
                 return;
             }
+            else if (node.left && !node.right) {
+                if (prevNode) {
+                    if (prevNode.data > node.data) {
+                        prevNode.setLeft(node.left);
+                        return;
+                    }
+                    else {
+                        prevNode.setRight(node.left);
+                        return;
+                    }
+                }
+                this.root = null;
+                return;
+            }
+            else if (node.right && !node.left) {
+                if (prevNode) {
+                    if (prevNode.data > node.data) {
+                        prevNode.setLeft(node.right);
+                        return;
+                    }
+                    else {
+                        prevNode.setRight(node.right);
+                        return;
+                    }
+                }
+                this.root = null;
+                return;
+            }
         }
         this._deleteHelper(node.left, num, node);
         this._deleteHelper(node.right, num, node);
