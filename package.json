@@ -5,12 +5,18 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "run": "tsc && npm index.js"
+    "start": "node ./src/index.js"
   },
   "keywords": [],
   "author": "Jan Steikowski <j.steikowski@aol.com>",
   "license": "MIT",
   "dependencies": {
-    "tsc": "^2.0.4"
+    "lodash": "^4.17.21",
+    "tsc": "^2.0.4",
+    "typescript": "^5.1.6"
+  },
+  "type": "module",
+  "devDependencies": {
+    "@types/lodash": "^4.14.195"
   }
 }
