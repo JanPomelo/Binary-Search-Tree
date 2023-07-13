@@ -31,4 +31,35 @@ export class Tree {
             return this._insertHelper(node.right, num);
         }
     }
+    delete(num) {
+        if (!this.root) {
+            return "Tree is empty";
+        }
+        const node = this.root;
+        return this._deleteHelper(node, num, null);
+    }
+    _deleteHelper(node, num, prevNode) {
+        if (node === null) {
+            return;
+        }
+        console.log(node.data);
+        if (node.data === num) {
+            if (!node.left && !node.right) {
+                if (prevNode) {
+                    if (prevNode.data > node.data) {
+                        prevNode.setLeft(null);
+                        return;
+                    }
+                    else {
+                        prevNode.setRight(null);
+                        return;
+                    }
+                }
+                this.root = null;
+                return;
+            }
+        }
+        this._deleteHelper(node.left, num, node);
+        this._deleteHelper(node.right, num, node);
+    }
 }

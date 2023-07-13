@@ -14,7 +14,7 @@ export class Tree {
     return this._insertHelper(node, num);
   }
 
-  _insertHelper(node: NoDe, num: number): string | void {
+  private _insertHelper(node: NoDe, num: number): string | void {
     if (node.data === num) {
       return `${num} already in the tree.`;
     }
@@ -32,5 +32,37 @@ export class Tree {
       }
       return this._insertHelper(node.right, num);
     }
+  }
+
+  delete(num: number) {
+    if (!this.root) {
+      return "Tree is empty";
+    }
+    const node: NoDe = this.root;
+    return this._deleteHelper(node, num, null);
+  }
+
+  private _deleteHelper(node: NoDe | null, num: number, prevNode: NoDe | null) {
+    if (node === null) {
+      return;
+    }
+    console.log(node.data);
+    if (node.data === num) {
+      if (!node.left && !node.right) {
+        if (prevNode) {
+          if (prevNode.data > node.data) {
+            prevNode.setLeft(null);
+            return;
+          } else {
+            prevNode.setRight(null);
+            return;
+          }
+        }
+        this.root = null;
+        return;
+      }
+    }
+      this._deleteHelper(node.left, num, node);
+      this._deleteHelper(node.right, num, node);
   }
 }
