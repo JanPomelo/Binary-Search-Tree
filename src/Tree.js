@@ -69,7 +69,7 @@ export class Tree {
                         return;
                     }
                 }
-                this.root = null;
+                this.root = node.left;
                 return;
             }
             else if (node.right && !node.left) {
@@ -83,7 +83,49 @@ export class Tree {
                         return;
                     }
                 }
-                this.root = null;
+                this.root = node.right;
+                return;
+            }
+            else {
+                let leftNode = node.right;
+                let origNode = node;
+                while (leftNode.left) {
+                    origNode = leftNode;
+                    leftNode = leftNode.left;
+                }
+                if (prevNode) {
+                    if (prevNode.data > node.data) {
+                        if (node != origNode) {
+                            origNode.setLeft(null);
+                        }
+                        prevNode.setLeft(leftNode);
+                        console.log(node.left);
+                        leftNode.setLeft(node.left);
+                        if (node.right != leftNode) {
+                            leftNode.setRight(node.right);
+                        }
+                        return;
+                    }
+                    else {
+                        if (node != origNode) {
+                            origNode.setLeft(null);
+                        }
+                        prevNode.setRight(leftNode);
+                        leftNode.setLeft(node.left);
+                        if (node.right != leftNode) {
+                            leftNode.setRight(node.right);
+                        }
+                        return;
+                    }
+                }
+                this.root = leftNode;
+                if (node != origNode) {
+                    origNode.setLeft(null);
+                }
+                leftNode.setLeft(node.left);
+                if (node.right != leftNode) {
+                    leftNode.setRight(node.right);
+                }
                 return;
             }
         }
