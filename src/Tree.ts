@@ -1,6 +1,8 @@
 import { NoDe } from "./Node.js";
 import { Queue } from "./Queue.js";
-import { buildTree } from "./index.js";
+import pkg from "lodash";
+const { uniq } = pkg;
+
 export class Tree {
   root: NoDe | null;
   constructor(root: NoDe | null) {
@@ -20,7 +22,6 @@ export class Tree {
     if (node.data === num) {
       return `${num} already in the tree.`;
     }
-    console.log(node.data);
     if (node.data > num) {
       if (!node.left) {
         node.setLeft(new NoDe(num));
@@ -48,7 +49,6 @@ export class Tree {
     if (node === null) {
       return;
     }
-    console.log(node.data);
     if (node.data === num) {
       if (!node.left && !node.right) {
         if (prevNode) {
@@ -99,7 +99,7 @@ export class Tree {
               origNode.setLeft(null);
             }
             prevNode.setLeft(leftNode);
-            console.log(node.left);
+          
             leftNode.setLeft(node.left);
             if (node.right != leftNode) {
               leftNode.setRight(node.right);
@@ -270,7 +270,6 @@ export class Tree {
 
   isBalanced(node: NoDe | null = this.root): boolean {
     if (node) {
-      console.log(node.data);
       if (!node.left && (node.right?.right || node.right?.left)) {
         return false;
       }
@@ -290,11 +289,55 @@ export class Tree {
   rebalance(): void {
     if (this.root === null) {
       return;
-    }
-    else {
+    } else {
       const arr = this.inOrder();
       this.root = buildTree(arr);
     }
   }
-
 }
+
+function sortAndFilterArray(array: number[]) {
+  array.sort((a, b) => {
+    return a - b;
+  });
+  array = uniq(array);
+  //array = array.filter((item, index) => myArr.indexOf(item) === index);
+  return array;
+}
+
+export function buildTree(array: number[]): NoDe | null {
+  if (array.length === 0) {
+    const err = new Error("Array is empty");
+    console.log(err);
+    return null;
+  }
+  let sortedArray: number[] = sortAndFilterArray(array);
+  const tree: NoDe | null = makeTree(sortedArray, 0, sortedArray.length - 1);
+  return tree;
+}
+
+function makeTree(array: number[], start: number, end: number): NoDe | null {
+  if (start > end) {
+    return null;
+  }
+  let mid: number = Math.floor((start + end) / 2);
+  let nodi = new NoDe(array[mid]);
+
+  nodi.setLeft(makeTree(array, start, mid - 1));
+  nodi.setRight(makeTree(array, mid + 1, end));
+
+  return nodi;
+}
+
+export const prettyPrint = (node: NoDe | null, prefix = "", isLeft = true) => {
+  if (node === null) {
+    return;
+  }
+  if (node.right !== null) {
+    prettyPrint(node.right, `${prefix}${isLeft ? "│   " : "    "}`, false);
+  }
+  console.log(`${prefix}${isLeft ? "└── " : "┌── "}${node.data}`);
+  if (node.left !== null) {
+    prettyPrint(node.left, `${prefix}${isLeft ? "    " : "│   "}`, true);
+  }
+};
