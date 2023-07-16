@@ -148,7 +148,7 @@ export class Tree {
   }
 
   levelOrder(fun: Function | null = null) {
-    if ((this.root === null)) {
+    if (this.root === null) {
       return [];
     }
     const queue: Queue = new Queue();
@@ -156,19 +156,81 @@ export class Tree {
     const arr = [];
     while (!queue.isEmpty) {
       let node = queue.peek();
-      if (!fun)
-        arr.push(node.data);
-      else
-        fun(node.data);
-      if (node.left)
-        queue.enqueue(node.left);
-      if (node.right)
-        queue.enqueue(node.right);
+      if (!fun) arr.push(node.data);
+      else fun(node.data);
+      if (node.left) queue.enqueue(node.left);
+      if (node.right) queue.enqueue(node.right);
       queue.dequeue();
     }
     if (!fun) {
       return arr;
     }
     return;
+  }
+
+  inOrder(
+    fun: Function | null = null,
+    node: NoDe | null = this.root,
+    arr: number[] = []
+  ): any {
+    if (!node) {
+      return;
+    }
+    if (!fun) {
+      let left = this.inOrder(null, node.left, arr);
+      if (typeof left === "number") arr.push(left);
+      arr.push(node.data);
+      let right = this.inOrder(null, node.right, arr);
+      if (typeof right === "number") arr.push(right);
+    } else {
+      this.inOrder(fun, node.left);
+      fun(node);
+      this.inOrder(fun, node.right);
+    }
+    return arr;
+  }
+
+  preOrder(
+    fun: Function | null = null,
+    node: NoDe | null = this.root,
+    arr: number[] = []
+  ): any {
+    if (!node) {
+      return;
+    }
+    if (!fun) {
+      arr.push(node.data);
+      let left = this.preOrder(null, node.left, arr);
+      if (typeof left === "number") arr.push(left);
+      let right = this.preOrder(null, node.right, arr);
+      if (typeof right === "number") arr.push(right);
+    } else {
+      fun(node);
+      this.preOrder(fun, node.left);
+      this.preOrder(fun, node.right);
+    }
+    return arr;
+  }
+
+  postOrder(
+    fun: Function | null = null,
+    node: NoDe | null = this.root,
+    arr: number[] = []
+  ): any {
+    if (!node) {
+      return;
+    }
+    if (!fun) {
+      let left = this.postOrder(null, node.left, arr);
+      if (typeof left === "number") arr.push(left);
+      let right = this.postOrder(null, node.right, arr);
+      if (typeof right === "number") arr.push(right);
+      arr.push(node.data);
+    } else {
+      this.postOrder(fun, node.left);
+      this.postOrder(fun, node.right);
+      fun(node);
+    }
+    return arr;
   }
 }

@@ -150,7 +150,7 @@ export class Tree {
         }
     }
     levelOrder(fun = null) {
-        if ((this.root === null)) {
+        if (this.root === null) {
             return [];
         }
         const queue = new Queue();
@@ -172,5 +172,65 @@ export class Tree {
             return arr;
         }
         return;
+    }
+    inOrder(fun = null, node = this.root, arr = []) {
+        if (!node) {
+            return;
+        }
+        if (!fun) {
+            let left = this.inOrder(null, node.left, arr);
+            if (typeof left === "number")
+                arr.push(left);
+            arr.push(node.data);
+            let right = this.inOrder(null, node.right, arr);
+            if (typeof right === "number")
+                arr.push(right);
+        }
+        else {
+            this.inOrder(fun, node.left);
+            fun(node);
+            this.inOrder(fun, node.right);
+        }
+        return arr;
+    }
+    preOrder(fun = null, node = this.root, arr = []) {
+        if (!node) {
+            return;
+        }
+        if (!fun) {
+            arr.push(node.data);
+            let left = this.preOrder(null, node.left, arr);
+            if (typeof left === "number")
+                arr.push(left);
+            let right = this.preOrder(null, node.right, arr);
+            if (typeof right === "number")
+                arr.push(right);
+        }
+        else {
+            fun(node);
+            this.preOrder(fun, node.left);
+            this.preOrder(fun, node.right);
+        }
+        return arr;
+    }
+    postOrder(fun = null, node = this.root, arr = []) {
+        if (!node) {
+            return;
+        }
+        if (!fun) {
+            let left = this.postOrder(null, node.left, arr);
+            if (typeof left === "number")
+                arr.push(left);
+            let right = this.postOrder(null, node.right, arr);
+            if (typeof right === "number")
+                arr.push(right);
+            arr.push(node.data);
+        }
+        else {
+            this.postOrder(fun, node.left);
+            this.postOrder(fun, node.right);
+            fun(node);
+        }
+        return arr;
     }
 }

@@ -53,8 +53,4 @@ const prettyPrint = (node: NoDe | null, prefix = "", isLeft = true) => {
 const myTree = new Tree(buildTree(myArr));
 console.log(myTree.find(3));
 prettyPrint(myTree.root);
-console.log(
-  myTree.levelOrder((data: number) => {
-    console.log(data);
-  })
-);
+console.log(myTree.preOrder());
