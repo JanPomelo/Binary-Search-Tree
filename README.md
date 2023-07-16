@@ -3,45 +3,45 @@
 This Project is for The Odin Project.
 The Goal was to Build a Binary Search Tree with several functions.
 
-## Classes
+# Classes
 
-### Tree
+## Tree
 
 The Binary Search Tree.
 
-#### Attributes
+### Attributes
 
 **root** - The root element
 
-#### Methods
+### Methods
 
-##### insert
+#### insert
 
-##### delete
+#### delete
 
-##### find
+#### find
 
-##### levelOrder
+#### levelOrder
 
-##### inOrder
+#### inOrder
 
-##### preOrder
+#### preOrder
 
-##### postOrder
+#### postOrder
 
-##### height
+#### height
 
-##### depth
+#### depth
 
-##### isBalances
+#### isBalances
 
-##### rebalance
+#### rebalance
 
-### NoDe
+## NoDe
 
 The Node inside the Binary Search Tree
 
-#### Atrributes
+### Atrributes
 
 **data** - The data of the NoDe
 
@@ -49,8 +49,8 @@ The Node inside the Binary Search Tree
 
 **right** - The NoDe right to this NoDe
 
-#### Methods
+### Methods
 
-##### setLeft
+#### setLeft
 
-##### setRight
+#### setRight
