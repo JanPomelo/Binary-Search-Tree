@@ -1,4 +1,5 @@
 import { NoDe } from "./Node.js";
+import { Queue } from "./Queue.js";
 export class Tree {
   root: NoDe | null;
   constructor(root: NoDe | null) {
@@ -144,5 +145,30 @@ export class Tree {
     } else {
       return this.find(value, node.right);
     }
+  }
+
+  levelOrder(fun: Function | null = null) {
+    if ((this.root === null)) {
+      return [];
+    }
+    const queue: Queue = new Queue();
+    queue.enqueue(this.root);
+    const arr = [];
+    while (!queue.isEmpty) {
+      let node = queue.peek();
+      if (!fun)
+        arr.push(node.data);
+      else
+        fun(node.data);
+      if (node.left)
+        queue.enqueue(node.left);
+      if (node.right)
+        queue.enqueue(node.right);
+      queue.dequeue();
+    }
+    if (!fun) {
+      return arr;
+    }
+    return;
   }
 }
