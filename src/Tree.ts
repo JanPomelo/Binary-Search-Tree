@@ -1,5 +1,6 @@
 import { NoDe } from "./Node.js";
 import { Queue } from "./Queue.js";
+import { buildTree } from "./index.js";
 export class Tree {
   root: NoDe | null;
   constructor(root: NoDe | null) {
@@ -285,4 +286,15 @@ export class Tree {
     }
     return true;
   }
+
+  rebalance(): void {
+    if (this.root === null) {
+      return;
+    }
+    else {
+      const arr = this.inOrder();
+      this.root = buildTree(arr);
+    }
+  }
+
 }

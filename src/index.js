@@ -12,7 +12,7 @@ function sortAndFilterArray(array) {
     //array = array.filter((item, index) => myArr.indexOf(item) === index);
     return array;
 }
-function buildTree(array) {
+export function buildTree(array) {
     if (array.length === 0) {
         const err = new Error("Array is empty");
         console.log(err);
@@ -50,4 +50,13 @@ prettyPrint(myTree.root);
 //console.log(myTree.preOrder());
 //const node: NoDe = myTree.find(27) as NoDe;
 //console.log(myTree.depth(node));
-console.log(myTree.isBalanced());
+myTree.rebalance();
+prettyPrint(myTree.root);
+myTree.insert(325);
+myTree.insert(326);
+myTree.insert(400);
+myTree.insert(1000);
+myTree.insert(2123);
+myTree.rebalance();
+console.log('-------------------');
+prettyPrint(myTree.root);
