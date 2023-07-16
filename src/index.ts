@@ -51,6 +51,8 @@ const prettyPrint = (node: NoDe | null, prefix = "", isLeft = true) => {
   }
 };
 const myTree = new Tree(buildTree(myArr));
-console.log(myTree.find(3));
+myTree.insert(27);
 prettyPrint(myTree.root);
 console.log(myTree.preOrder());
+const node: NoDe = myTree.find(8) as NoDe;
+console.log(myTree.height(node));

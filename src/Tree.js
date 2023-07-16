@@ -233,4 +233,16 @@ export class Tree {
         }
         return arr;
     }
+    height(node, depthCounter = 0, arr = []) {
+        if (!node.left && !node.right) {
+            arr.push(depthCounter);
+        }
+        if (node.left) {
+            this.height(node.left, depthCounter + 1, arr);
+        }
+        if (node.right) {
+            this.height(node.right, depthCounter + 1, arr);
+        }
+        return Math.max(...arr);
+    }
 }
