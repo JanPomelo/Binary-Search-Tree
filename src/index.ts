@@ -54,5 +54,5 @@ const myTree = new Tree(buildTree(myArr));
 myTree.insert(27);
 prettyPrint(myTree.root);
 console.log(myTree.preOrder());
-const node: NoDe = myTree.find(8) as NoDe;
-console.log(myTree.height(node));
+const node: NoDe = myTree.find(27) as NoDe;
+console.log(myTree.depth(node));

@@ -245,4 +245,20 @@ export class Tree {
         }
         return Math.max(...arr);
     }
+    depth(node, depthCounter = 0, curNode = this.root) {
+        if (!curNode) {
+            const err = new Error(`The NoDe ${node} is not in the list.`);
+            console.log(err);
+            return;
+        }
+        if (curNode === node) {
+            return depthCounter;
+        }
+        if (curNode.data > node.data) {
+            return this.depth(node, depthCounter + 1, curNode.left);
+        }
+        else {
+            return this.depth(node, depthCounter + 1, curNode.right);
+        }
+    }
 }
