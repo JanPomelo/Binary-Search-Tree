@@ -132,4 +132,20 @@ export class Tree {
         this._deleteHelper(node.left, num, node);
         this._deleteHelper(node.right, num, node);
     }
+    find(value, node = this.root) {
+        if (!node) {
+            const err = new Error(`The value ${value} is not in the Tree!`);
+            console.log(err);
+            return;
+        }
+        if (value === (node === null || node === void 0 ? void 0 : node.data)) {
+            return node;
+        }
+        if (node.data > value) {
+            return this.find(value, node.left);
+        }
+        else {
+            return this.find(value, node.right);
+        }
+    }
 }
