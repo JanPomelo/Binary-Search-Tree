@@ -266,4 +266,23 @@ export class Tree {
       return this.depth(node, depthCounter + 1, curNode.right);
     }
   }
+
+  isBalanced(node: NoDe | null = this.root): boolean {
+    if (node) {
+      console.log(node.data);
+      if (!node.left && (node.right?.right || node.right?.left)) {
+        return false;
+      }
+      if (!node.right && (node.left?.left || node.left?.right)) {
+        return false;
+      }
+      if (!this.isBalanced(node?.left)) {
+        return false;
+      }
+      if (!this.isBalanced(node?.right)) {
+        return false;
+      }
+    }
+    return true;
+  }
 }

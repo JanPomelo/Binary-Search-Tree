@@ -51,8 +51,9 @@ const prettyPrint = (node: NoDe | null, prefix = "", isLeft = true) => {
   }
 };
 const myTree = new Tree(buildTree(myArr));
-myTree.insert(27);
+myTree.insert(2);
 prettyPrint(myTree.root);
-console.log(myTree.preOrder());
-const node: NoDe = myTree.find(27) as NoDe;
-console.log(myTree.depth(node));
+//console.log(myTree.preOrder());
+//const node: NoDe = myTree.find(27) as NoDe;
+//console.log(myTree.depth(node));
+console.log(myTree.isBalanced());

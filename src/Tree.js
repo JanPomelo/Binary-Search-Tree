@@ -261,4 +261,23 @@ export class Tree {
             return this.depth(node, depthCounter + 1, curNode.right);
         }
     }
+    isBalanced(node = this.root) {
+        var _a, _b, _c, _d;
+        if (node) {
+            console.log(node.data);
+            if (!node.left && (((_a = node.right) === null || _a === void 0 ? void 0 : _a.right) || ((_b = node.right) === null || _b === void 0 ? void 0 : _b.left))) {
+                return false;
+            }
+            if (!node.right && (((_c = node.left) === null || _c === void 0 ? void 0 : _c.left) || ((_d = node.left) === null || _d === void 0 ? void 0 : _d.right))) {
+                return false;
+            }
+            if (!this.isBalanced(node === null || node === void 0 ? void 0 : node.left)) {
+                return false;
+            }
+            if (!this.isBalanced(node === null || node === void 0 ? void 0 : node.right)) {
+                return false;
+            }
+        }
+        return true;
+    }
 }
